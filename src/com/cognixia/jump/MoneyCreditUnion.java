@@ -45,7 +45,7 @@ public class MoneyCreditUnion {
 
 		input.close();
 
-		System.out.println("\nGoodbye");
+		System.out.println("\nThank you for banking with The Money Credit Union. Goodbye");
 
 	}
 

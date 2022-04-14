@@ -73,8 +73,10 @@ public class Controller {
 			System.out.println("\nPlease enter your username\n");
 			String userInput = input.nextLine();
 			for (Account account : accounts) {
-				if (userInput == account.getUsername()) {
+				if (userInput.equals(account.getUsername())) {
+					checkUsername=false;
 					return account;
+					
 				}
 			}
 			System.out.println("\nAccount not found. Please try again\n");
