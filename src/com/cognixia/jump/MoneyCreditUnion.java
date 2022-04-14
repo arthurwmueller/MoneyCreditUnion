@@ -10,7 +10,7 @@ import com.cognixia.jump.model.Account;
 public class MoneyCreditUnion {
 
 	public static void main(String[] args) {
-		
+
 		List<Account> accounts = new ArrayList<Account>();
 
 		Scanner input = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class MoneyCreditUnion {
 			System.out.println("1. Login");
 			System.out.println("2. Create an account");
 			System.out.println("3. Exit\n");
-			String choice=input.nextLine();
+			String choice = input.nextLine();
 			int selection = 0;
 			try {
 				selection = Integer.parseInt(choice);
@@ -37,6 +37,8 @@ public class MoneyCreditUnion {
 				accounts.add(Controller.createAccount(accounts));
 			} else if (selection == 3) {
 				loop = false;
+			} else {
+				System.out.println("\nPlease enter a valid selection\n");
 			}
 
 		}

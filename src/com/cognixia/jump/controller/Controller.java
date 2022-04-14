@@ -62,18 +62,18 @@ public class Controller {
 	}
 
 	public static void login(List<Account> accounts) {
-		Account account=findAccount(accounts);
+		Account account = findAccount(accounts);
 		checkPin(account);
 		homePage(account);
 	}
-	
+
 	private static Account findAccount(List<Account> accounts) {
 		boolean checkUsername = true;
 		while (checkUsername) {
 			System.out.println("\nPlease enter your username\n");
-			String userInput=input.nextLine();
-			for(Account account : accounts) {
-				if(userInput==account.getUsername()) {
+			String userInput = input.nextLine();
+			for (Account account : accounts) {
+				if (userInput == account.getUsername()) {
 					return account;
 				}
 			}
@@ -81,21 +81,81 @@ public class Controller {
 		}
 		return null;
 	}
-	
+
 	private static void checkPin(Account account) {
-		boolean checkPin=true;
-		while(checkPin) {
+		boolean checkPin = true;
+		while (checkPin) {
 			System.out.println("\nPlease enter your pin\n");
-			String userInput=input.nextLine();
-			if(userInput.equals(account.getPin())) {
-				checkPin=false;
+			String userInput = input.nextLine();
+			if (userInput.equals(account.getPin())) {
+				checkPin = false;
 			} else {
 				System.out.println("\nAccess Denied\n");
 			}
 		}
 	}
-	
+
 	private static void homePage(Account account) {
+		System.out.println("\nUser " + account.getUsername() + " Welcome to The Money Credit Union\n");
+		boolean loop = true;
+		while (loop) {
+			System.out.println("\nPlease make a selection");
+			System.out.println("1. Deposit");
+			System.out.println("2. Withdraw");
+			System.out.println("3. Transfer");
+			System.out.println("4. Recent transactions");
+			System.out.println("5. User information");
+			System.out.println("6. Sign Out");
+			String choice = input.nextLine();
+			int selection = 0;
+			try {
+				selection = Integer.parseInt(choice);
+			} catch (Exception e) {
+				System.out.println("\nPlease enter a valid selection\n");
+			}
+			if (selection == 1) {
+				deposit(account);
+			} else if (selection==2) {
+				withdraw(account);
+			} else if (selection == 3) {
+				transfer(account);
+			} else if (selection == 4) {
+				transactions(account);
+			} else if (selection == 5) {
+				info(account);
+			} else if (selection == 6) {
+				loop = false;
+			} else {
+				System.out.println("\nPlease enter a valid selection\n");
+			}
+		}
+	}
+
+	private static void info(Account account) {
+		System.out.println();
+		System.out.println("Hello user "+account.getUsername());
+		System.out.println("Your PIN is "+account.getPin());
+		System.out.println("Your account balance is $"+account.getBalance());
+		System.out.println();
+	}
+
+	private static void transactions(Account account) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void transfer(Account account) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void withdraw(Account account) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void deposit(Account account) {
+		// TODO Auto-generated method stub
 		
 	}
 
