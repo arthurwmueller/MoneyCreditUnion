@@ -7,13 +7,14 @@ public class Account {
 
 	private String username;
 	private String pin;
-	private int balance;
+	private double balance;
 	private List<String> transactions=new ArrayList<String>();
 	
 	
 
 	public Account() {
 		super();
+		balance=0;
 	}
 
 	public String getPin() {
@@ -24,7 +25,7 @@ public class Account {
 		this.pin = pin;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 

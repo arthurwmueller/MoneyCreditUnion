@@ -1,12 +1,17 @@
 package com.cognixia.jump;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.cognixia.jump.controller.Controller;
+import com.cognixia.jump.model.Account;
 
 public class MoneyCreditUnion {
 
 	public static void main(String[] args) {
+		
+		List<Account> accounts = new ArrayList<Account>();
 
 		Scanner input = new Scanner(System.in);
 
@@ -29,7 +34,7 @@ public class MoneyCreditUnion {
 			if (selection == 1) {
 
 			} else if (selection == 2) {
-				Controller.createAccount();
+				accounts.add(Controller.createAccount(accounts));
 			} else if (selection == 3) {
 				loop = false;
 			}
