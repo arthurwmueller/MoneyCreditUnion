@@ -64,7 +64,7 @@ public class Controller {
 	public static void login(List<Account> accounts) {
 		Account account = findAccount(accounts);
 		checkPin(account);
-		homePage(account);
+		homePage(accounts, account);
 	}
 
 	private static Account findAccount(List<Account> accounts) {
@@ -95,7 +95,7 @@ public class Controller {
 		}
 	}
 
-	private static void homePage(Account account) {
+	private static void homePage(List<Account> accounts, Account account) {
 		System.out.println("\nUser " + account.getUsername() + " Welcome to The Money Credit Union\n");
 		boolean loop = true;
 		while (loop) {
@@ -115,10 +115,10 @@ public class Controller {
 			}
 			if (selection == 1) {
 				deposit(account);
-			} else if (selection==2) {
+			} else if (selection == 2) {
 				withdraw(account);
 			} else if (selection == 3) {
-				transfer(account);
+				transfer(accounts, account);
 			} else if (selection == 4) {
 				transactions(account);
 			} else if (selection == 5) {
@@ -133,30 +133,113 @@ public class Controller {
 
 	private static void info(Account account) {
 		System.out.println();
-		System.out.println("Hello user "+account.getUsername());
-		System.out.println("Your PIN is "+account.getPin());
-		System.out.println("Your account balance is $"+account.getBalance());
+		System.out.println("Hello user " + account.getUsername());
+		System.out.println("Your PIN is " + account.getPin());
+		System.out.println("Your account balance is $" + account.getBalance());
 		System.out.println();
 	}
 
 	private static void transactions(Account account) {
-		// TODO Auto-generated method stub
-		
+		List<String> transactions = account.getTransactions();
+		System.out.println("\nTransactions:");
+		if (transactions.size() <= 5) {
+			for (int i = transactions.size(); i > 0; i--) {
+				System.out.println(transactions.get(i - 1));
+			}
+		} else {
+			for (int i = transactions.size(); i > transactions.size() - 5; i--) {
+				System.out.println(transactions.get(i - 1));
+			}
+		}
 	}
 
-	private static void transfer(Account account) {
-		// TODO Auto-generated method stub
-		
+	private static void transfer(List<Account> accounts, Account account) {
+		Account transferAccount = findTransferAccount(accounts);
+		boolean validateTransfer = true;
+		double amount = 0.00;
+		while (validateTransfer) {
+			System.out.println("\nHow much money do you want to transfer to User " + transferAccount.getUsername());
+			String userInput = input.nextLine();
+			try {
+				amount = Double.parseDouble(userInput);
+				if (amount < 0) {
+					throw new Exception();
+				}
+			} catch (Exception e) {
+				System.out.println("Please enter a valid number");
+			}
+			if (amount > account.getBalance()) {
+				System.out.println("\nInsufficient Funds\n");
+			}
+			if (amount >= 0 && amount <= account.getBalance()) {
+				validateTransfer = false;
+			}
+		}
+		account.setBalance(account.getBalance() - amount);
+		transferAccount.setBalance(transferAccount.getBalance() + amount);
+		account.addTransaction("$"+amount+" transferred to "+transferAccount.getUsername()+" at "+ LocalDateTime.now());
+	}
+
+	private static Account findTransferAccount(List<Account> accounts) {
+		boolean findUser = true;
+		while (findUser) {
+			System.out.println("\nWhich user do you want to transfer to?");
+			String userInput = input.nextLine();
+			for (Account transferAccount : accounts) {
+				if (userInput.equals(transferAccount.getUsername())) {
+					return transferAccount;
+				}
+			}
+			System.out.println("\nAccount not found. Please try again\n");
+		}
+		return null;
 	}
 
 	private static void withdraw(Account account) {
-		// TODO Auto-generated method stub
-		
+		boolean checkWithdraw = true;
+		double amount = 0.00;
+		while (checkWithdraw) {
+			System.out.println("\nHow much do you wish to withdraw?");
+			String userInput = input.nextLine();
+			try {
+				amount = Double.parseDouble(userInput);
+				if (amount < 0) {
+					throw new Exception();
+				}
+			} catch (Exception e) {
+				System.out.println("Please enter a valid number");
+			}
+			if (amount > account.getBalance()) {
+				System.out.println("\nInsufficient Funds\n");
+			}
+			if (amount >= 0 && amount <= account.getBalance()) {
+				account.setBalance(account.getBalance() - amount);
+				account.addTransaction("$"+amount+" withdrawn at "+LocalDateTime.now());
+				checkWithdraw = false;
+			}
+		}
 	}
 
 	private static void deposit(Account account) {
-		// TODO Auto-generated method stub
-		
+		boolean checkDeposit = true;
+		double amount = 0.00;
+		while (checkDeposit) {
+			System.out.println("\nHow much do you wish to deposit?");
+			String userInput = input.nextLine();
+			try {
+				amount = Double.parseDouble(userInput);
+				if (amount < 0) {
+					throw new Exception();
+				}
+			} catch (Exception e) {
+				System.out.println("Please enter a valid number");
+			}
+			if(amount>=0) {
+				account.setBalance(account.getBalance()+amount);
+				account.addTransaction("$"+amount+" deposited at "+LocalDateTime.now());
+				checkDeposit=false;
+			}
+		}
 	}
 
 }
