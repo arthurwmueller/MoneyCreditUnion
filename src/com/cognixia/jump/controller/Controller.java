@@ -178,6 +178,7 @@ public class Controller {
 		account.setBalance(account.getBalance() - amount);
 		transferAccount.setBalance(transferAccount.getBalance() + amount);
 		account.addTransaction("$"+amount+" transferred to "+transferAccount.getUsername()+" at "+ LocalDateTime.now());
+		System.out.println("Your balance is now $"+account.getBalance()+"\n");
 	}
 
 	private static Account findTransferAccount(List<Account> accounts) {
@@ -215,6 +216,7 @@ public class Controller {
 			if (amount >= 0 && amount <= account.getBalance()) {
 				account.setBalance(account.getBalance() - amount);
 				account.addTransaction("$"+amount+" withdrawn at "+LocalDateTime.now());
+				System.out.println("Your balance is now $"+account.getBalance()+"\n");
 				checkWithdraw = false;
 			}
 		}
@@ -237,6 +239,7 @@ public class Controller {
 			if(amount>=0) {
 				account.setBalance(account.getBalance()+amount);
 				account.addTransaction("$"+amount+" deposited at "+LocalDateTime.now());
+				System.out.println("Your balance is now $"+account.getBalance()+"\n");
 				checkDeposit=false;
 			}
 		}
