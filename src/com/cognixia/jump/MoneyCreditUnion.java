@@ -15,7 +15,7 @@ public class MoneyCreditUnion {
 
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("Welcome to Money Credit Union\n");
+		System.out.println("Welcome to The Money Credit Union\n");
 
 		boolean loop = true;
 
@@ -32,7 +32,7 @@ public class MoneyCreditUnion {
 				System.out.println("\nPlease enter a valid selection\n");
 			}
 			if (selection == 1) {
-
+				Controller.login(accounts);
 			} else if (selection == 2) {
 				accounts.add(Controller.createAccount(accounts));
 			} else if (selection == 3) {
