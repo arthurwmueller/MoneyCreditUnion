@@ -6,22 +6,22 @@ import java.util.List;
 public class Account {
 
 	private String username;
-	private String password;
+	private String pin;
 	private int balance;
 	private List<String> transactions=new ArrayList<String>();
 	
-	public Account(String username, String password) {
+	
+
+	public Account() {
 		super();
-		this.username = username;
-		this.password = password;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPin() {
+		return pin;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPin(String pin) {
+		this.pin = pin;
 	}
 
 	public int getBalance() {
@@ -36,6 +36,10 @@ public class Account {
 		return username;
 	}
 	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public List<String> getTransactions() {
 		return transactions;
 	}

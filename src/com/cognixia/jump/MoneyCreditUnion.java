@@ -2,6 +2,8 @@ package com.cognixia.jump;
 
 import java.util.Scanner;
 
+import com.cognixia.jump.controller.Controller;
+
 public class MoneyCreditUnion {
 
 	public static void main(String[] args) {
@@ -17,14 +19,21 @@ public class MoneyCreditUnion {
 			System.out.println("1. Login");
 			System.out.println("2. Create an account");
 			System.out.println("3. Exit\n");
-			int selection = input.nextInt();
+			String choice=input.nextLine();
+			int selection = 0;
+			try {
+				selection = Integer.parseInt(choice);
+			} catch (Exception e) {
+				System.out.println("\nPlease enter a valid selection\n");
+			}
 			if (selection == 1) {
 
 			} else if (selection == 2) {
-
+				Controller.createAccount();
 			} else if (selection == 3) {
 				loop = false;
 			}
+
 		}
 
 		input.close();
